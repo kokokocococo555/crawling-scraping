@@ -120,44 +120,44 @@ def textSave(text_list, directory_name):
 #         fileSave(title, number, text, directory_name, encoding="utf-8")
 
 ## 3. スクレイピングを実行
+if __name__ == '__main__':
+    # メイン処理
+    # --------------------------------------
+    # 作品ページのURLを指定（コメントアウト・コメントインで指定できるようにしています）
+    # ※すでに保存済みの作品を指定するとエラーが出て処理が止まります。
+    url_list = [
+        "https://ncode.syosetu.com/n2267be/" # Ｒｅ：ゼロから始める異世界生活
+        ,
+        "https://ncode.syosetu.com/n6316bn/" # 転生したらスライムだった件
+#         ,
+#         "https://ncode.syosetu.com/n2031cu/" # 異世界転移で女神様から祝福を！　～いえ、手持ちの異能があるので結構です～
+#         ,
+#         "https://ncode.syosetu.com/n3009bk/" # 盾の勇者の成り上がり
+#         ,
+#         "https://ncode.syosetu.com/n6475db/" # 私、能力は平均値でって言ったよね！
+#         ,
+#         "https://ncode.syosetu.com/n5881cl/" # 賢者の孫
+               ]
+    # --------------------------------------
 
-# メイン処理
-# --------------------------------------
-# 作品ページのURLを指定（コメントアウト・コメントインで指定できるようにしています）
-# ※すでに保存済みの作品を指定するとエラーが出て処理が止まります。
-url_list = [
-    "https://ncode.syosetu.com/n2267be/" # Ｒｅ：ゼロから始める異世界生活
-    ,
-    "https://ncode.syosetu.com/n6316bn/" # 転生したらスライムだった件
-#     ,
-#     "https://ncode.syosetu.com/n2031cu/" # 異世界転移で女神様から祝福を！　～いえ、手持ちの異能があるので結構です～
-#     ,
-#     "https://ncode.syosetu.com/n3009bk/" # 盾の勇者の成り上がり
-#     ,
-#     "https://ncode.syosetu.com/n6475db/" # 私、能力は平均値でって言ったよね！
-#     ,
-#     "https://ncode.syosetu.com/n5881cl/" # 賢者の孫
-           ]
-# --------------------------------------
+    # --------------------------------------
+    # 各作品を保存するディレクトリ名を指定（存在しなければ作成されます）
+    directory = "text"
+    # --------------------------------------
 
-# --------------------------------------
-# 各作品を保存するディレクトリ名を指定（存在しなければ作成されます）
-directory = "text"
-# --------------------------------------
+    # 各作品に処理を実行
+    for url in url_list:
+        # 作品名を取得
+        story_title = getStoryTitle(url)
 
-# 各作品に処理を実行
-for url in url_list:
-    # 作品名を取得
-    story_title = getStoryTitle(url)
+        # 作品名をディレクトリ名にする
+        directory_name = directory + "/" + story_title
 
-    # 作品名をディレクトリ名にする
-    directory_name = directory + "/" + story_title
+        # 作品ディレクトリを作成
+        os.makedirs(directory_name)
 
-    # 作品ディレクトリを作成
-    os.makedirs(directory_name)
+        # すべての本文ページから本文を抜き出してリスト化
+        text_list = getAllTexts(url)
 
-    # すべての本文ページから本文を抜き出してリスト化
-    text_list = getAllTexts(url)
-
-    # 各話を別々に.txtファイルで保存
-    textSave(text_list, directory_name)
+        # 各話を別々に.txtファイルで保存
+        textSave(text_list, directory_name)
