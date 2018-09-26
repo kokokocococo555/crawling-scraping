@@ -63,7 +63,7 @@ def main():
 
         novel_title = bs_obj.find("p",{"class":"novel_title"})
         # タイトルとして保存できない文字を除去
-        for s in '\/*?"<>:|':
+        for s in r'\/*?"<>:|':
             novel_title = novel_title.replace(s, '')
 
         save_as_csv(stories, novel_title)
