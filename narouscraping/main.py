@@ -47,6 +47,9 @@ def main():
 
         url_list = ["https://ncode.syosetu.com" + a_bs_obj.find("a").attrs["href"] for a_bs_obj in bs_obj.findAll("dl", {"class": "novel_sublist2"})]
         date_list = bs_obj.findAll("dt",{"class":"long_update"})
+        novel_title = bs_obj.find("p",{"class":"novel_title"}).get_text()
+        for s in r'\/*?"<>:|':
+            novel_title = novel_title.replace(s, '')
 
         # 各話の本文情報を取得
         for j in range(len(url_list)):
@@ -60,11 +63,6 @@ def main():
                 "date": date_list[j].get_text(),
                 "text": get_main_text(bs_obj),
                 })
-
-        novel_title = bs_obj.find("p",{"class":"novel_title"})
-        # タイトルとして保存できない文字を除去
-        for s in r'\/*?"<>:|':
-            novel_title = novel_title.replace(s, '')
 
         save_as_csv(stories, novel_title)
   
