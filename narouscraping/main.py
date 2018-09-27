@@ -103,7 +103,7 @@ def save_as_csv(stories, novel_title = ""):
 
     # ファイル名の作成
     today = datetime.datetime.now().strftime('%Y-%m-%d_%Hh%Mm')
-    csv_name = os.path.join(directory_name, 'narou_ranking「{}」[{}].csv'.format(novel_title, today))
+    csv_name = os.path.join(directory_name, '「{}」[{}].csv'.format(novel_title, today))
 
     # 列名（1行目）を作成
     col_name = ['No', 'title', 'url', 'date', 'text']
