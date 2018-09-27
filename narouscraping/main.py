@@ -53,7 +53,8 @@ def main():
 
         # 各話の本文情報を取得
         for j in range(len(url_list)):
-            bs_obj = make_bs_obj(url_list[j])
+            url = url_list[j]
+            bs_obj = make_bs_obj(url)
             time.sleep(3)
 
             stories.append({
